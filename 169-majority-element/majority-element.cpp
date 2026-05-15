@@ -1,24 +1,20 @@
 class Solution {
 public:
     int majorityElement(vector<int>& nums) {
+        unordered_map<int, int> mp;
+
         int n = nums.size();
 
-        // Pick each element one by one
-        for (int i = 0; i < n; i++) {
+        // Store frequency
+        for (int num : nums) {
+            mp[num]++;
+        }
 
-            int count = 0;
+        // Check majority
+        for (auto it : mp) {
 
-            // Count frequency of nums[i]
-            for (int j = i; j < n; j++) {
-
-                if (nums[j] == nums[i]) {
-                    count++;
-                }
-            }
-
-            // Majority condition
-            if (count > n / 2) {
-                return nums[i];
+            if (it.second > n / 2) {
+                return it.first;
             }
         }
 
