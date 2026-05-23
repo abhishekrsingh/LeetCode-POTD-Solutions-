@@ -1,6 +1,8 @@
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
+        if(head == NULL || head->next == NULL)
+            return NULL;
         ListNode *slow = head, *fast = head;
         
         // Step 1: Find if a cycle exists
