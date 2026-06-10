@@ -13,13 +13,13 @@ public:
             txt_freq[txt[i]]++;
         }
 
-        for(int i=m; i<n; i++)
+        for(int i=m; i<=n; i++)
         {
             if(pat_freq == txt_freq) result.push_back(i-m);
             txt_freq[txt[i]]++;
             txt_freq[txt[i-m]]--;
         }
-        if(pat_freq == txt_freq) result.push_back(n-m);
+        // if(pat_freq == txt_freq) result.push_back(n-m);
 
 
         return result;
