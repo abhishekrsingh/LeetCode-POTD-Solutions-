@@ -3,32 +3,27 @@ public:
     bool checkDistances(string s, vector<int>& distance) {
         int n = s.length();
 
-        // Har character ke liye loop chalayein
+        // 1. Initialize with -1 (0 is a valid index, so we can't use it)
+        vector<int> seen(26, -1);
+
         for (int i = 0; i < n; i++) {
-            // Dusra loop jo i ke aage se start hoga same character dhoondne ke
-            // liye
-            for (int j = i + 1; j < n; j++) {
+            int idx = s[i] - 'a';
 
-                // Agar same character mil gaya
-                if (s[i] == s[j]) {
-                    int actual_dist = j - i - 1; // Beech ke characters ka count
-                    int expected_dist =
-                        distance[s[i] - 'a']; // Alphabet index nikalne ke liye
-                                              // ('b' - 'a' = 1)
+            // 2. Agar character pehle aa chuka hai (dobara dikha)
+            if (seen[idx] != -1) {
+                int curr_dist = i - seen[idx] - 1; // Current actual gap
 
-                    // Agar distance match nahi hua toh directly false return
-                    // karo
-                    if (actual_dist != expected_dist) {
-                        return false;
-                    }
-
-                    // Character mil gaya aur check ho gaya, toh andar wale loop
-                    // se break karo
-                    break;
+                // Agar yeh gap expected distance ke equal nahi hai, toh false
+                if (curr_dist != distance[idx]) {
+                    return false;
                 }
             }
+            // 3. Agar character pehli baar aaya hai
+            else {
+                seen[idx] = i; // Uska pehla index lock kar do
+            }
         }
-        // Agar sabhi characters ka distance sahi mila
+
         return true;
     }
 };
