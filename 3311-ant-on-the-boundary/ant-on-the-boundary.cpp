@@ -4,13 +4,11 @@ public:
         int n = arr.size();
         int count = 0;
         int sum = 0;
-        for(int i=0; i<n; i++)
+        for(int x:arr)  //for(int x:arr)
         {
-            sum += arr[i];
+            sum += x;
             if(sum == 0){
                 count++;
-            }else if(arr[i] == 0){
-                continue;
             }
         }
         return count;
