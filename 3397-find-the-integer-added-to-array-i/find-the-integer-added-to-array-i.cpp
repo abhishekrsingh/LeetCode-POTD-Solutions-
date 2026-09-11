@@ -1,8 +1,14 @@
 class Solution {
 public:
     int addedInteger(vector<int>& nums1, vector<int>& nums2) {
-        int sum1 = accumulate(nums1.begin(), nums1.end(), 0);
-        int sum2 = accumulate(nums2.begin(), nums2.end(), 0);
-        return (sum2 - sum1) / (int)nums1.size();
+        int sum = *min_element(nums2.begin(), nums2.end()) - *min_element(nums1.begin(), nums1.end());
+        return sum;
     }
+
+
+    // int addedInteger(vector<int>& nums1, vector<int>& nums2) {
+    //     int sum1 = accumulate(nums1.begin(), nums1.end(), 0);
+    //     int sum2 = accumulate(nums2.begin(), nums2.end(), 0);
+    //     return (sum2 - sum1) / (int)nums1.size();
+    // }
 };
