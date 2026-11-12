@@ -1,34 +1,16 @@
 class Solution {
 public:
-    int longestMonotonicSubarray(vector<int>& arr) {
-        int n = arr.size();
-        if (n < 2)
-            return n;
-
-        int maxLength = 1;
-
-        // 1. Strictly Increasing check
-        int currentLength = 1;
-        for (int i = 0; i < n - 1; i++) {
-            if (arr[i] < arr[i + 1]) {
-                currentLength++;
-            } else {
-                currentLength = 1;
-            }
-            maxLength = max(maxLength, currentLength);
+    int longestMonotonicSubarray(vector<int>& nums) {
+        int best = 1, up = 1, down = 1;
+        for (size_t i = 1; i < nums.size(); ++i) {
+            up = nums[i - 1] < nums[i]
+                     ? up + 1
+                     : 1; // increasing streak ending at nums[i]
+            down = nums[i - 1] > nums[i]
+                       ? down + 1
+                       : 1; // decreasing streak ending at nums[i]
+            best = max({best, up, down});
         }
-
-        // 2. Strictly Decreasing check
-        currentLength = 1;
-        for (int i = 0; i < n - 1; i++) {
-            if (arr[i] > arr[i + 1]) {
-                currentLength++;
-            } else {
-                currentLength = 1;
-            }
-            maxLength = max(maxLength, currentLength);
-        }
-
-        return maxLength;
+        return best;
     }
 };
